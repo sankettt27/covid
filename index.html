@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COVID Vaccine Analysis | Medical Data Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header class="glass-header">
+        <div class="logo">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+            <h1>COVID Vaccine Analysis</h1>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Section A: Dataset Description -->
+        <section id="section-a" class="card fade-in">
+            <div class="section-header">
+                <div class="icon-box green">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                </div>
+                <h2>Dataset Description</h2>
+            </div>
+            <div id="description-content" class="stats-grid-mini">
+                <div class="mini-stat">
+                    <span class="label">Total Rows</span>
+                    <span id="rows-count" class="value">Loading...</span>
+                </div>
+                <div class="mini-stat">
+                    <span class="label">Total Columns</span>
+                    <span id="cols-count" class="value">Loading...</span>
+                </div>
+            </div>
+            <div class="column-list">
+                <h3>Column Names</h3>
+                <div id="columns-container" class="tags"></div>
+            </div>
+        </section>
+
+        <!-- Section: Interactive Selection -->
+        <section class="card selection-card fade-in">
+            <div class="section-header">
+                <div class="icon-box green">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </div>
+                <h2>Interactive State Analysis</h2>
+            </div>
+            <div class="controls">
+                <div class="control-group">
+                    <label for="state-select">Select State</label>
+                    <select id="state-select">
+                        <option value="">Choose a state...</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <div class="dose-grid">
+            <!-- First Dose Section -->
+            <section id="first-dose-section" class="card fade-in">
+                <div class="section-header">
+                    <div class="icon-box blue">1</div>
+                    <h2>First Dose Breakdown</h2>
+                </div>
+                <div class="dose-stats">
+                    <div class="mini-stat">
+                        <span class="label">Total Vaccinated</span>
+                        <span id="fd-total" class="value">0</span>
+                    </div>
+                </div>
+                <div class="chart-container-large">
+                    <canvas id="fdChart"></canvas>
+                </div>
+            </section>
+
+            <!-- Second Dose Section -->
+            <section id="second-dose-section" class="card fade-in">
+                <div class="section-header">
+                    <div class="icon-box blue">2</div>
+                    <h2>Second Dose Breakdown</h2>
+                </div>
+                <div class="dose-stats">
+                    <div class="mini-stat">
+                        <span class="label">Total Vaccinated</span>
+                        <span id="sd-total" class="value">0</span>
+                    </div>
+                </div>
+                <div class="chart-container-large">
+                    <canvas id="sdChart"></canvas>
+                </div>
+            </section>
+        </div>
+
+        <!-- Section F: Global Analytics Charts -->
+        <div class="charts-grid">
+            <section id="section-f1" class="card fade-in">
+                <div class="section-header">
+                    <h3>Gender Distribution</h3>
+                </div>
+                <div class="chart-container">
+                    <canvas id="genderChart"></canvas>
+                </div>
+            </section>
+            <section id="section-f2" class="card fade-in">
+                <div class="section-header">
+                    <h3>Top 10 States (First Dose)</h3>
+                </div>
+                <div class="chart-container">
+                    <canvas id="stateChart"></canvas>
+                </div>
+            </section>
+        </div>
+
+        <!-- Section B & C: State-wise First & Second Dose -->
+        <section id="section-b" class="card fade-in">
+            <div class="section-header">
+                <div class="icon-box green">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                </div>
+                <h2>State-wise Vaccination (First & Second Dose)</h2>
+            </div>
+            <div class="table-container">
+                <table id="statewise-table">
+                    <thead>
+                        <tr>
+                            <th>State</th>
+                            <th>First Dose Administered</th>
+                            <th>Second Dose Administered</th>
+                        </tr>
+                    </thead>
+                    <tbody id="statewise-body">
+                        <!-- Data will be injected here -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <div class="bg-illustration">
+        <div class="circle c1"></div>
+        <div class="circle c2"></div>
+        <div class="plus p1">+</div>
+        <div class="plus p2">+</div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>
